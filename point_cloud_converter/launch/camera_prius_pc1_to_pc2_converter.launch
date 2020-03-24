@@ -1,0 +1,10 @@
+<launch>
+	<node pkg="point_cloud_converter" name="point_cloud_converter" type="point_cloud_converter_node" >
+		<remap from="points_in" to="/prius/front_camera/depth/points"/>
+		<remap from="points2_out" to="/prius/pc1_to_pc2/scan" />
+		<!--
+		<remap from="points2_in" to="velodyne_points"/>
+		<remap from="points_out" to="velodyne_points" />
+		-->
+	</node>
+</launch>
