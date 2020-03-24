@@ -1,0 +1,47 @@
+<launch>
+      
+	<!-- The gmapping pkg does not accept 3D point cloud to convert in map, then it is necessary to convert to 2D laser scan, other possibility maybe is use the Octomap-tree 3D instead gmapping pkg -->
+        <include file="$(find my_bmw_mapping)/launch/point_cloud_to_laser_convertion.launch" />   
+
+	<!-- The URDF is not well parsed to transform laser-scan sensors to the base_footprint "virtual" base. So it is necessary to "force" this transform through the pkg below" or fix the urdf (hard work) -->
+	<node pkg="tf" type="static_transform_publisher" name="base_to_camera_broadcaster" args="0 0 1 0 0 0 1 base_footprint front_left_laser_link 100" />    
+	
+
+    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+      <!-- simulation remap from="scan" to="/velodyne_laser_topic"/ -->
+      <!-- real -->
+      <!-- remap from="scan" to="/scan_filtered"/ -->
+      <remap from="scan" to ="/prius/front_left_laser/scan"/>
+      <param name="map_frame" value="map"/>
+      <param name="base_frame" value="base_footprint"/>
+      <param name="odom_frame" value="odom"/>
+      <param name="map_udpate_interval" value="5.0"/>
+      <param name="maxUrange" value="80.0"/>
+      <param name="sigma" value="0.05"/>
+      <param name="kernelSize" value="1"/>
+      <param name="lstep" value="0.05"/>
+      <param name="astep" value="0.05"/>
+      <param name="iterations" value="5"/>
+      <param name="lsigma" value="0.075"/>
+      <param name="ogain" value="3.0"/>
+      <param name="lskip" value="0"/>
+      <param name="srr" value="0.1"/>
+      <param name="srt" value="0.2"/>
+      <param name="str" value="0.1"/>
+      <param name="stt" value="0.2"/>
+      <param name="linearUpdate" value="0.2"/>
+      <param name="angularUpdate" value="0.1"/>
+      <param name="temporalUpdate" value="3.0"/>
+      <param name="resampleThreshold" value="0.5"/>
+      <param name="particles" value="100"/>
+      <param name="xmin" value="-50.0"/>
+      <param name="ymin" value="-50.0"/>
+      <param name="xmax" value="50.0"/>
+      <param name="ymax" value="50.0"/>
+      <param name="delta" value="0.05"/>
+      <param name="llsamplerange" value="0.01"/>
+      <param name="llsamplestep" value="0.01"/>
+      <param name="lasamplerange" value="0.005"/>
+      <param name="lasamplestep" value="0.005"/>
+    </node>
+</launch>
