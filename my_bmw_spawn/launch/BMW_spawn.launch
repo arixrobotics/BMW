@@ -2,7 +2,7 @@
 <launch>
 
   <arg name="model" default="$(find prius_description)/urdf/prius.urdf"/>
-  <arg name="rvizconfig" default="$(find car_demo)/rviz/bmw_config.rviz" />
+  <arg name="rvizconfig" default="$(find my_bmw_spawn)/rviz/bmw_config.rviz" />
 
   <param name="robot_description" textfile="$(arg model)"/>
 
@@ -27,7 +27,7 @@
   
   <node pkg="car_demo" type="joystick_translator" name="joy_translator"/>
   
-  <node name="keyboard_translator" pkg="car_demo" type="keyboard_translator.py" args="" required="true" />
+  <node name="keyboard_translator" pkg="my_bmw_spawn" type="keyboard_translator.py" args="" required="true" />
 
   
 
