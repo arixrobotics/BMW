@@ -29,6 +29,6 @@
   
   <node name="keyboard_translator" pkg="my_bmw_spawn" type="keyboard_translator.py" args="" required="true" />
 
-  
+  <node name="odom_tf_pub" pkg="my_bmw_spawn" type="odom_tf_pub.py"/>
 
 </launch>

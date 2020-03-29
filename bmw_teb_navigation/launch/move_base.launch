@@ -1,7 +1,8 @@
+<?xml version="1.0"?>
 <launch>
 
   <!--- Run AMCL -->
-  <include file="$(find bmw_teb_navigation)/launch/amcl.launch" />
+  <!-- <include file="$(find bmw_teb_navigation)/launch/amcl.launch" /> -->
 
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
 

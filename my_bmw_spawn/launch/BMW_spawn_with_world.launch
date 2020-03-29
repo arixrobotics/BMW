@@ -2,12 +2,12 @@
 <launch>
 
   <arg name="model" default="$(find prius_description)/urdf/prius.urdf"/>
-  <arg name="rvizconfig" default="$(find car_demo)/rviz/demo.rviz" />
+  <arg name="rvizconfig" default="$(find my_bmw_spawn)/rviz/bmw_config.rviz" />
 
   <param name="robot_description" textfile="$(arg model)"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find car_demo)/worlds/mcity.world"/>
+    <arg name="world_name" value="$(find my_bmw_spawn)/worlds/test.world"/>
       
       <arg name="verbose" value="true"/>
       <arg name="debug" value="false" />
@@ -27,8 +27,8 @@
   
   <node pkg="car_demo" type="joystick_translator" name="joy_translator"/>
   
-  <node name="keyboard_translator" pkg="car_demo" type="keyboard_translator.py" args="" required="true" />
+  <node name="keyboard_translator" pkg="my_bmw_spawn" type="keyboard_translator.py" args="" required="true" />
 
-  
+  <node name="odom_tf_pub" pkg="my_bmw_spawn" type="odom_tf_pub.py"/>
 
 </launch>
