@@ -24,11 +24,19 @@
 
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
 
+  <!-- we dont need this one  -->
+  <!-- <node pkg="car_demo" type="joystick_translator" name="joy_translator"/> -->
   
-  <node pkg="car_demo" type="joystick_translator" name="joy_translator"/>
+  <!-- i commented this out so that we can easily kill and rerun it while tuning the parameters -->
+  <!-- it is required so must be rosrun seperately -->
+  <!-- <node name="cmd_vel_translator" pkg="my_bmw_spawn" type="cmd_vel_odom_translator.py" args="" required="true" /> -->
   
-  <node name="keyboard_translator" pkg="my_bmw_spawn" type="keyboard_translator.py" args="" required="true" />
+  <!-- this is the code that provides odometry of the car -->
+  <node name="odom_tf_pub" pkg="my_bmw_spawn" type="odom_tf_pub3.py"/>
 
-  <node name="odom_tf_pub" pkg="my_bmw_spawn" type="odom_tf_pub.py"/>
+  <!-- I'm putting the laser scan launch files here instead of in mapping launcher -->
+  <include file="$(find point_cloud_converter)/launch/center_laser_prius_pc1_to_pc2_converter.launch" />
+  <include file="$(find point_cloud_to_laserscan)/launch/bmw_center_pc_to_laserscan_conversion.launch" />
+
 
 </launch>

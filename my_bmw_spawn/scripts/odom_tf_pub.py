@@ -21,6 +21,11 @@ def callback(data):
                      rospy.Time.now(),
                      "base_link",
                      "odom")
+    # Next publish the odometry
+    odom = Odometry()
+    odom.header.frame_id = "odom"
+    odom.child_frame_id = "base_link";
+    odom.pose.pose.position = 
 
 def listener():
     rospy.init_node('listener', anonymous=True)

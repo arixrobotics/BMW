@@ -25,9 +25,9 @@
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
 
   
-  <node pkg="car_demo" type="joystick_translator" name="joy_translator"/>
+  <!-- <node pkg="car_demo" type="joystick_translator" name="joy_translator"/> -->
   
-  <node name="keyboard_translator" pkg="my_bmw_spawn" type="keyboard_translator.py" args="" required="true" />
+  <node name="cmd_vel_translator" pkg="my_bmw_spawn" type="cmd_vel_translator.py" args="" required="true" />
 
   <node name="odom_tf_pub" pkg="my_bmw_spawn" type="odom_tf_pub.py"/>
 

@@ -1,0 +1,32 @@
+1 - Roslaunch my_bmw_spwan BMW_spawn.launch
+2 - Roslaunch my_bmw_mapping front_left_laser_gmapping.launch
+3- roslaunch my_bmw_navigation move_base.launch (The amcl and previous map is called here)
+4- rosrun my_bmw_navigation bmw_teleop.py      (run to map better the environment)
+5- rostopic pub /prius        (change the gear, throthle, etc)
+
+5-rosrun my_bmw_navigation cmd_vel_to_ackermann_conversion.py    (useless)
+
+
+Arif updated:
+1 - roslaunch my_bmw_spwan BMW_spawn.launch
+	-- this will also run the new odom tf publisher
+
+2 - rosrun citysim_tc prius_teleop_keyboard.py 
+	-- dont run this if you are going auto
+	-- only run for testing and for mapping
+	
+3 - roslaunch my_bmw_mapping laser_mapping.launch 
+	-- do this to save the map $ rosrun map_server map_saver -f /home/arif/map
+
+4 - roslaunch bmw_teb_navigation amcl.launch		
+	-- to be later included in 5
+	-- make sure to change the map file location
+
+5 - roslaunch bmw_teb_navigation move_base.launch 
+
+6 - rosrun my_bmw_spawn cmd_vel_odom_translator.py   
+	-- to be later included in 1 or 5
+
+7- give it a goal in RViz
+
+
